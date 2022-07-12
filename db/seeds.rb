@@ -5,3 +5,12 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+
+Article.delete_all
+ArticleType.delete_all
+
+#article_types = [FactoryBot.create(:article_type), FactoryBot.create(:tutorial_article_type), FactoryBot.create(:blog_article_type)]
+# hmm = {:article, article_type: FactoryBot.create(:article_type)}
+# 16.times do
+#   FactoryBot.create(hmm)
+# end
