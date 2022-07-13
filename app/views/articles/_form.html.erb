@@ -23,7 +23,7 @@
 
   <div>
     <%= form.label :article_type_id, style: "display: block" %>
-    <%= form.text_field :article_type_id %>
+    <%= collection_select(:article, :article_type_id, ArticleType.all, :id, :name, prompt: false) %>
   </div>
 
   <div>

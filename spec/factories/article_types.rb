@@ -10,7 +10,7 @@ FactoryBot.define do
   end
 
   factory :blog_article_type, class: "ArticleType" do
-    name { "Blog" }
+    name { "Blogs" }
     description { "Blogs about tech" }
   end
 end

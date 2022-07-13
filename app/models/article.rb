@@ -3,4 +3,6 @@ class Article < ApplicationRecord
 
   validates :title, :body, presence: true
   validates :title, uniqueness: {case_sensitive: false}
+
+  default_scope -> { order(:updated_at).reverse_order }
 end

@@ -1,8 +1,15 @@
 <p style="color: green"><%= notice %></p>
 
 <h1>Articles</h1>
+<%# <%= select("article_type", "article_type_id", ArticleType.all.collect {|p| [ p.name, p.id ] }, { include_blank: true }) %>
+
+<%# <%= form_tag do %>
+  <%# <%= select_tag "article_type", options_from_collection_for_select(ArticleType.all, "id", "name") %>
+  <%# <%= submit_tag 'Filter' %>
+<%# <% end %>
 
 <div id="articles">
+  <%= paginate @articles %>
   <% @articles.each do |article| %>
     <%= render article %>
     <p>

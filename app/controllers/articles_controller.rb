@@ -3,7 +3,8 @@ class ArticlesController < ApplicationController
 
   # GET /articles or /articles.json
   def index
-    @articles = Article.all
+    byebug
+    @articles = Article.includes(:article_type).page params[:page]
   end
 
   # GET /articles/1 or /articles/1.json

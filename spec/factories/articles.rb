@@ -6,14 +6,14 @@ FactoryBot.define do
   end
 
   factory :tutorial_article, class: "Article" do
-    sequence(:title) { |n| "Tutorial Article #{n}" }
-    body { "This is a tutorial about stuff." }
+    sequence(:title) { |n| "#{Faker::Hacker.adjective} #{Faker::Hacker.abbreviation} (turorial #{n})" }
+    body { Faker::Hacker.say_something_smart }
     association :article_type, factory: :tutorial_article_type
   end
 
   factory :blog_article, class: "Article" do
-    sequence(:title) { |n| "Blog Article #{n}" }
-    body { "Read this blog about stuff." }
+    sequence(:title) { |n| "#{Faker::Science.element_subcategory} (blog #{n})" }
+    body { Faker::Lorem.sentence(word_count: 8, supplemental: true, random_words_to_add: 256) }
     association :article_type, factory: :blog_article_type
   end
 end

@@ -18,11 +18,11 @@ RSpec.describe "/articles", type: :request do
   # Article. As you add validations to Article, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    attributes_for(:article).merge(article_type_id: create(:article_type).id)
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    attributes_for(:article).merge(title: nil)
   }
 
   describe "GET /index" do
@@ -77,9 +77,9 @@ RSpec.describe "/articles", type: :request do
         }.to change(Article, :count).by(0)
       end
 
-      it "renders a successful response (i.e. to display the 'new' template)" do
+      it "renders a response with 422 status (i.e. to display the 'new' template)" do
         post articles_url, params: { article: invalid_attributes }
-        expect(response).to be_successful
+        expect(response).to have_http_status(:unprocessable_entity)
       end
     end
   end
@@ -87,14 +87,15 @@ RSpec.describe "/articles", type: :request do
   describe "PATCH /update" do
     context "with valid parameters" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        { title: "New Title", body: "New Body" }
       }
 
       it "updates the requested article" do
         article = Article.create! valid_attributes
         patch article_url(article), params: { article: new_attributes }
         article.reload
-        skip("Add assertions for updated state")
+        expect(article.title).to eq("New Title")
+        expect(article.body).to eq("New Body")
       end
 
       it "redirects to the article" do
@@ -106,10 +107,10 @@ RSpec.describe "/articles", type: :request do
     end
 
     context "with invalid parameters" do
-      it "renders a successful response (i.e. to display the 'edit' template)" do
+      it "renders a response with 422 status (i.e. to display the 'edit' template)" do
         article = Article.create! valid_attributes
         patch article_url(article), params: { article: invalid_attributes }
-        expect(response).to be_successful
+        expect(response).to have_http_status(:unprocessable_entity)
       end
     end
   end

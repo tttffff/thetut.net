@@ -2,11 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "articles/new", type: :view do
   before(:each) do
-    assign(:article, Article.new(
-      title: "MyString",
-      body: "MyText",
-      article_type: nil
-    ))
+    assign(:article, build(:article))
   end
 
   it "renders new article form" do
