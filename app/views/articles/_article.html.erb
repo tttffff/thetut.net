@@ -1,17 +1,21 @@
-<div id="<%= dom_id article %>">
-  <p>
-    <strong>Title:</strong>
-    <%= article.title %>
-  </p>
+ <div class="block">
+ <div id="<%= dom_id article %>" class="columns notification">
+  <div class="column is-2">
+    <strong><%= article.title %></strong>
+  </div>
 
-  <p>
-    <strong>Body:</strong>
-    <%= article.body %>
-  </p>
+  <div class="column is-6">
+    <%= article.body.truncate(200) %>
+  </div>
 
-  <p>
-    <strong>Article type:</strong>
+  <div class="column is-1">
     <%= article.article_type %>
-  </p>
+  </div>
 
+  <div class="column is-3">
+    <%= link_to "Show", article, class: "button is-link" %>
+    <%= link_to "Edit", article, class: "button is-link" %>
+    <%= button_to "Delete", article, method: :delete, class: "button is-danger" %>
+  </div>
+</div>
 </div>

@@ -1,21 +1,34 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Articles</h1>
 <%# <%= select("article_type", "article_type_id", ArticleType.all.collect {|p| [ p.name, p.id ] }, { include_blank: true }) %>
 
-<%# <%= form_tag do %>
-  <%# <%= select_tag "article_type", options_from_collection_for_select(ArticleType.all, "id", "name") %>
-  <%# <%= submit_tag 'Filter' %>
-<%# <% end %>
+<%= form_tag articles_path, method: 'get', class: "block" do %>
+  <div class="select">
+    <%= select_tag "article_type", options_from_collection_for_select(@article_types, "name", "name"), prompt: "All Types" %>
+  </div>
+  <%= submit_tag "Filter", class: "button" %>
+<% end %>
+<%= paginate @articles %>
+<div class="block">
+<div class="columns notification">
+  <div class="column is-2">
+    <%= link_to "Title", sort: "title", class: "is-link" %>
+  </div>
 
-<div id="articles">
-  <%= paginate @articles %>
+  <div class="column is-6">
+    <%= link_to "Body", sort: "body", class: "is-text" %>
+  </div>
+
+  <div class="column is-1">
+    <%= link_to "Type", sort: "type", class: "is-info" %>
+  </div>
+</div>
+</div>
   <% @articles.each do |article| %>
     <%= render article %>
-    <p>
-      <%= link_to "Show this article", article %>
-    </p>
   <% end %>
-</div>
+
+
+
 
 <%= link_to "New article", new_article_path %>
